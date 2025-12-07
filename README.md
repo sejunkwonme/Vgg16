@@ -55,8 +55,3 @@ CIFAR-10 - <https://www.cs.toronto.edu/~kriz/cifar.html>\
   - 처음부터 끝까지 Work Item을 3차원으로 설정하여 진행함, 이는 이미지가 NCHW의 3개 채널로 들어오기 때문
   - 그러나 1등을 한 조는 모든 Work Item을 2차원으로 설정하여 진행, 이는 오버헤드를 줄이는 결과를 불러옴, 결과적으로 아쉽게 2등을 함
 ***
-
-## 4. 결과
-
-
-![Performace Graph](./images/picture1.png "Performace Graph")
