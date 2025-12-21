@@ -14,12 +14,12 @@
 **Prerequisites**
 * OpenCL과 CUDA 라이브러리 설치, C++ 빌드 및 실행이 가능한 환경
 * 사용한 데이터셋의 다운로드 링크\
-CIFAR-10 - <https://www.cs.toronto.edu/~kriz/cifar.html>\
+CIFAR-10 - <https://www.cs.toronto.edu/~kriz/cifar.html>
 
 **테스트 환경 - 실습실 Desktop**
 * i7 8700K 6Core 12Threads
 * 32 GB Main Memory
-* RTX 3060 VRAM 12GB
+* RTX 3060 VRAM 12GB FP32 12.74 TFLOPS
 ***
 
 ## 2. 구현 과정
@@ -32,7 +32,7 @@ CIFAR-10 - <https://www.cs.toronto.edu/~kriz/cifar.html>\
   - 중간 발표 타 팀과 비교했을 때 턱없이 적은 성능 향상, 이를 통해 work item이 한번씩만 연산을 한다고 해도 개수가 너무 많으면 scheduling 되어 결국엔 순차적으로 실행된다는 것을 깨달음
 * 개선 전략
   - ML Runtime framework에서는 CNN레이어에 대해 이미 연구로 검증된 최적화 기법들을 사용하는 것을 확인
-  - Nvidia의 cuDNN 라이브러리에서는 CNN 에대해 GEMM, Winograd, FFT, im2col 기법으로 구현하는 것을 보고 강의시간에 배운 것과 관련있는 GEMM, im2col 기법을 사용하기로 결정
+  - Nvidia의 cuDNN 라이브러리에서는 CNN에 대해 GEMM, Winograd, FFT, im2col 기법으로 구현하는 것을 보고 강의시간에 배운 것과 관련있는 GEMM, im2col 기법을 사용하기로 결정
 * 최적화 작업 중기
   - GEMM기법을 통해 Matrix Multiplification을 Parallel 처리로 구현 이때 유의미한 성능개선 체감
   - 하지만 이때도 강의에서 제시된 실행 시간의 Guidance의 상단에는 미치지 못함
@@ -55,3 +55,8 @@ CIFAR-10 - <https://www.cs.toronto.edu/~kriz/cifar.html>\
   - 처음부터 끝까지 Work Item을 3차원으로 설정하여 진행함, 이는 이미지가 NCHW의 3개 채널로 들어오기 때문
   - 그러나 1등을 한 조는 모든 Work Item을 2차원으로 설정하여 진행, 이는 오버헤드를 줄이는 결과를 불러옴, 결과적으로 아쉽게 2등을 함
 ***
+
+## 4. Image
+
+![screenshot1](/assets/vgg16_figure1.png)
+![screenshot2](/assets/vgg16_figure2.png)
